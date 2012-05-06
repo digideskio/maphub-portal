@@ -1,4 +1,3 @@
-Test
 # Windows notes
 Doesn't work at all on Windows any more due to libv8 dependency which rubyracer (?) and less depend on. libv8 isn't available, and doesn't compile, on Windows. Ignoring it (which used to work with troublesome dependencies) prevents various things from working (like rails even starting up).
 
@@ -8,6 +7,16 @@ Can't run "gem update --system" in Ubuntu, gives a warning about that overwritin
 Need to run "sudo bundle install", needs to modify /var/lib/gems
 Running "rails server" seems to just create/overwrite files.
 Need to run "sudo gem update" after "sudo bundle install" to update all the dependencies, like activerecord.
+
+Need to make sure Ruby 1.9 is being used...
+
+sudo apt-get remove ruby1.8 ruby1.8-dev
+sudo apt-get install ruby1.9.1 ruby1.9.1-dev
+
+test database users are user1@example.com/test
+
+sudo apt-get install gdal-bin python-gdal (installs 1.7 and gdal2tiles.py)
+http://thewayofcoding.com/2010/08/lucid-ubuntu-and-gdal-latest/
 
 
 
