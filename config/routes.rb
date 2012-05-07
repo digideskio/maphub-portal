@@ -9,6 +9,7 @@ MaphubPortal::Application.routes.draw do
     resources :annotations
   end
   
+  
   resources :users, :only => [:show, :update, :index] do 
     resources :annotations, :only => [:show, :index]
     resources :control_points, :only => [:show, :index]
@@ -25,9 +26,13 @@ MaphubPortal::Application.routes.draw do
   # default homepage
   root :to => "home#index"
   
+  # static content
   match "terms" => 'home#terms'
   match "contact" => 'home#contact'
   match "help" => 'home#help'
+  
+  # tag lookup for annotations
+  match 'annotations/tags/:text' => 'annotations#tags', :as => "annotation_tag_find"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

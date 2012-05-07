@@ -6,8 +6,10 @@ class MapsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json # index.json.erb
-#		format.json { render :file => 'index.json.erb', :content_type => 'application/json' }
+      format.json {render :json => @maps.to_json(
+                                    :only =>[:id,:updated_at],
+                                    :methods => [:no_control_points]
+                                                )}
     end
   end
   
@@ -18,10 +20,7 @@ class MapsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json # show.json.erb
-      format.xml  {render :xml => @map}
-      format.rdf  {render :rdf => @map, :httpURI => base_uri(request.url)}
-      format.ttl  {render :ttl => @map, :httpURI => base_uri(request.url)}
-      format.nt  {render :nt => @map, :httpURI => base_uri(request.url)}
+      format.rdf  # show.rdf.erb
     end
     
   end

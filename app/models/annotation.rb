@@ -3,6 +3,8 @@ class Annotation < ActiveRecord::Base
   belongs_to :user, :counter_cache => true
   belongs_to :map
   
+  has_many :tags
+  
   validates_presence_of :body, :map
 
   def truncated_body
@@ -19,6 +21,22 @@ class Annotation < ActiveRecord::Base
     Segment.create_from_wkt_data(self.wkt_data)
   end
   
+  # Finds tags for given input text
+  def self.find_tags(text)
+    
+    # TODO implement real lookup
+    tags = []
+    5.times do
+      r = rand(1000)
+      tag = {
+        dbpedia_uri: "dbpedia-uri-#{r}",
+        label: "label-#{r}"
+      }
+      tags << tag
+    end
+    
+    tags.to_json
+  end
   
   # Writes annotation metadata in a given RDF serialization format
   def to_rdf(format, options = {})
