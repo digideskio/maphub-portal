@@ -1,31 +1,3 @@
-
-
-
-
-
-
-/*
-  http PUT to /maps/<id>, like changing map name, etc.
-  what format for PUT?
- 
- edit create_maps migratino page, add lat/lnt
- change controller, like control_point controller
- 
- test with other map
- 
- use google UI to create points/polygons
- 
- ask carl about reports/deliverables, are READMEs okay? date for grading?
- 
- *
- */
-
-
-
-
-
-
-
 /*
  * Declare AlphaOverlay as a dependency since that is the actual map overlay that is used.
  */
