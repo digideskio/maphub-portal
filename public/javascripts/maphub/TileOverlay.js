@@ -57,12 +57,11 @@ maphub.TileOverlay.prototype.deleteHiddenTiles = function() {
 	/*
 	 * Determine the boundaries of the viewport in terms of tile coordinates.
 	 */
-	var tileNE = this.getTileUrlCoordFromLatLng(bounds.getNorthEast(), zoom);
-	var tileSW = this.getTileUrlCoordFromLatLng(bounds.getSouthWest(), zoom);
-	var minX = tileSW.x;
-	var maxX = tileNE.x;
-	var minY = tileSW.y;
-	var maxY = tileNE.y;
+	var minX = swTile.x;
+	var maxX = neTile.x;
+	var maxY = swTile.y;
+	var minY = neTile.y;
+//	console.log('Deleting tiles outside '+minX+','+minY+' and '+maxX+','+maxY);
 
 	/*
 	 * Create an object in which we will store the tiles we want to keep. This
@@ -92,6 +91,8 @@ maphub.TileOverlay.prototype.deleteHiddenTiles = function() {
 	}
 	
 	this.tiles = tilesToKeep;
+//	console.log('Tiles after deletion:');
+//	console.log(this.tiles);
 	return;
 }
 
@@ -116,7 +117,7 @@ maphub.TileOverlay.prototype.getTile = function(point, zoomLevel, container) {
 	var tileID = zoomLevel + '-' + point.x + '-' + point.y;
 	var div = null;
 	if (typeof this.tiles[tileID] == "undefined") {
-//		console.log("Creating new tile for " + tileID);
+		console.log("Creating new tile for " + tileID);
 		/*
 		 * The tile doesn't exist, create it. First, find out what the map's
 		 * tile coordinates (not lat/lng or x/y) are. Since the map uses a flat
@@ -141,11 +142,13 @@ maphub.TileOverlay.prototype.getTile = function(point, zoomLevel, container) {
 		 * Cache the tile for quick retrieval later.
 		 */
 		this.tiles[tileID] = div;
+		console.log('Tiles:');
+		console.log(this.tiles);
 	} else {
 		/*
 		 * The tile already exists, use it.
 		 */
-//		console.log("Found existing tile for " + tileID);
+		console.log("Found existing tile for " + tileID);
 		div = this.tiles[tileID];
 	}
 

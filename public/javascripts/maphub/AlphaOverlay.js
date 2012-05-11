@@ -2,7 +2,7 @@
  * Define this class's prerequisites and only set up this class after those
  * prerequisites have been loaded.
  */
-define(['TileOverlay', 'ExtDraggableObject'], function() {
+define(['TileOverlay', '/javascripts/ExtDraggableObject.js'], function() {
 	/**
 	 * A TileOverlay that includes support for changing the transparency/opacity
 	 * of the overlay.
@@ -40,7 +40,6 @@ define(['TileOverlay', 'ExtDraggableObject'], function() {
 	maphub.AlphaOverlay.SliderImageURL = '/images/opacity-slider.png';
 	
 	maphub.AlphaOverlay.prototype.getTile = function(point, zoomLevel, container) {
-		console.log("maphub.AlphaOverlay.prototype.getTile");
 		/*
 		 * Call super().
 		 */
@@ -90,6 +89,7 @@ define(['TileOverlay', 'ExtDraggableObject'], function() {
 	}
 
 	maphub.AlphaOverlay.prototype.setOpacity = function(pixelX) {
+//		console.log('maphub.AlphaOverlay.prototype.setOpacity');
 		// Range = 0 to maphub.AlphaOverlay.SliderWidth
 		/*
 		 * Calculate and record the new opacity (as a percentage).
@@ -97,11 +97,15 @@ define(['TileOverlay', 'ExtDraggableObject'], function() {
 		var value = (100 / maphub.AlphaOverlay.SliderWidth) * pixelX;
 		if (value < 0) value = 0;
 		this.opacity = value;
+//		console.log('New opacity: '+value);
 		
 		/*
 		 * Set the opacity of the actual tiles.
 		 */
+//		console.log('Tiles:');
+//		console.log(maphub.TileOverlay.prototype.getTiles.apply(this));
 		for (var tileID in this.tiles) {
+			console.log('Changing tile '+tileID);
 			this.setObjectOpacity(this.tiles[tileID], value);
 		}
 	}
