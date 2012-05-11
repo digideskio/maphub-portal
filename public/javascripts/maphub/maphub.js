@@ -16,16 +16,28 @@ if (typeof requirejs === "undefined") { throw 'MapHub requires RequireJS to func
 
 
 
+/*
+ * Easy but simple/naive way of getting URL query parameters.
+ */
+function getQueryString() {
+  var result = {}, queryString = location.search.substring(1), re = /([^&=]+)=([^&]*)/g, m;
+  while (m = re.exec(queryString)) result[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+  return result;
+}
+
+
 
 /**
  * Load everything.
  */
 require(['Map'], function() {
+	var mapID = getQueryString()['mapid'];
 	var map = new maphub.Map({
-		id: 'ct002033'
+		deleteHiddenTiles: true,
+		id: mapID
 	});
 	
-	map.render(document.getElementById('map_canvas'));
+	map.render(document.getElementById('map'));
 });
 
 
