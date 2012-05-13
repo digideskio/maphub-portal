@@ -63,7 +63,7 @@ define(['AlphaOverlay', 'ControlPoint'], function() {
 		 * The map's bounds. This should be changed to be retrieved from the map
 		 * metadata, once it exists there...
 		 */
-		this.metadata.bounds = new google.maps.LatLngBounds(new google.maps.LatLng(41.8128911451, 8.73896538004), new google.maps.LatLng(51.4235907642, 27.8177687755));
+//		this.metadata.bounds = new google.maps.LatLngBounds(new google.maps.LatLng(41.8128911451, 8.73896538004), new google.maps.LatLng(51.4235907642, 27.8177687755));
 
 		this.controlPoints = [];
 		if (this.metadata && this.metadata['controlpoints'] && this.metadata['controlpoints'].length > 2) {
@@ -113,8 +113,12 @@ define(['AlphaOverlay', 'ControlPoint'], function() {
 			 * We have enough control points to show the Google Map. Create the
 			 * Google map.
 			 */
+			var mapBounds = new google.maps.LatLngBounds(
+				new google.maps.LatLng(this.metadata.sw_lat, this.metadata.sw_lng),
+				new google.maps.LatLng(this.metadata.ne_lat, this.metadata.ne_lng)
+			);
 			var mapOptions = {
-				center: this.metadata.bounds.getCenter(),
+				center: mapBounds.getCenter(),
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				streetViewControl: false,
 				zoom: 5
