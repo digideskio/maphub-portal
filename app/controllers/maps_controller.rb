@@ -22,7 +22,18 @@ class MapsController < ApplicationController
       format.json # show.json.erb
       format.rdf  # show.rdf.erb
     end
-    
   end
-  
+
+  # PUT /maps/1
+  # PUT /maps/1.xml
+  def update
+    @map = Map.find(params[:id])
+    @map.update_attributes({
+    	'ne_lat' => params['ne_lat'],
+    	'ne_lng' => params['ne_lng'],
+    	'sw_lat' => params['sw_lat'],
+    	'sw_lng' => params['sw_lng']
+    })
+    redirect_to :action => 'index'
+  end
 end
