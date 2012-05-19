@@ -23,6 +23,7 @@
 -->
     <!-- Le JS -->
     <%= javascript_include_tag "application" %>
+    <%= yield(:head) %>
   </head>
   <body>
 
@@ -62,6 +63,7 @@
     <div class="container">
       <div class="content">
         <%= yield %>
+        <%= yield(:content) %>
       </div>
       
     </div> <!-- /container -->

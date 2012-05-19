@@ -36,8 +36,9 @@ class Map < ActiveRecord::Base
   
   def overlay_tileset_uri
     uri = "#{map_base_uri}/ts_google/#{self.identifier}/"
-    response_code = Net::HTTP.get_response(URI.parse(uri)).code
-    return (response_code == "200") ? uri : nil
+#    response_code = Net::HTTP.get_response(URI.parse(uri)).code
+#    return (response_code == "200") ? uri : nil
+    return uri
   end
   
   def short_title

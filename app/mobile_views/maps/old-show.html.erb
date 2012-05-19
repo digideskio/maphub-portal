@@ -1,0 +1,17 @@
+<div id="map"></div>
+<%= javascript_include_tag 'http://www.google.com/jsapi' %>
+<%= javascript_include_tag :mobile %>
+<%= javascript_tag do %>
+google.load('maps', '3', {
+	callback: function() {
+		//var mapID = getQueryString()['mapid'];
+		var mapID = location.pathname.match(/\/maps\/([0-9]+)/)[1];
+		var map = new maphub.Map({
+			deleteHiddenTiles: true,
+			id: mapID
+		});
+		map.render(document.getElementById('map'));
+	},
+	other_params: "sensor=true&key=AIzaSyAZWsx0xPMR9SigtiD2QNmMxS7hbvwjJHI"
+});
+<% end %>

@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   #  
   before_filter :prepend_mobile_path
   def prepend_mobile_path() if mobile_request? then prepend_view_path Rails.root+'app'+'mobile_views' end end
+# for testing w/phone @ home, force to use mobile views
+#  def mobile_request?() true end
   def mobile_request?() request.subdomains.first == 'm' end
+
   helper_method :mobile_request?
 
 
