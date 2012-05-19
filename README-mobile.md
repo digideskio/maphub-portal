@@ -21,10 +21,6 @@ app/controllers/application_controller.rb
 
 Two methods were added to allow mobile views to be used and preferred over non-mobile views (and allow fall-back to non-mobile views): "prepend_mobile_path" and "mobile_request?".
 
-app/models/map.rb
-
-A "bug" was fixed whereby the tile server URL was accessed every time the map property for this url was read. This was changed to simply return a string instead of testing the URL and returning a string or nil.
-
 app/views/layouts/default.html.erb
 
 Two "yield" statements were added with section labels so the mobile views can "insert" code in either the <head> tag or the container <div> of the layout document.
